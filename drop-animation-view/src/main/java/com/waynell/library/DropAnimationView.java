@@ -28,7 +28,7 @@ public class DropAnimationView extends FrameLayout {
 
     private final Random mRandom = new Random();
 
-    private boolean mStopAnimation;
+    private boolean animating;
 
     private int mMinSize;
 
@@ -60,7 +60,7 @@ public class DropAnimationView extends FrameLayout {
 
         @Override
         public void run() {
-            if (mStopAnimation || (mMinSize == 0 && mMaxSize == 0)) {
+            if (!animating || (mMinSize == 0 && mMaxSize == 0)) {
                 return;
             }
 
@@ -166,14 +166,14 @@ public class DropAnimationView extends FrameLayout {
 
     public void startAnimation() {
         if(mDrawables != null) {
-            mStopAnimation = false;
+            animating = true;
             setVisibility(VISIBLE);
             beginAnimate(false);
         }
     }
 
     public void stopAnimation() {
-        mStopAnimation = true;
+        animating = false;
         removeCallbacks(mRunnable);
         setVisibility(GONE);
         for (AnimatorSet as : mAnimatorSetList) {
@@ -218,6 +218,11 @@ public class DropAnimationView extends FrameLayout {
 
     public void setEnableRotationAnimation(boolean enableRotationAnimation) {
         mEnableRotationAnimation = enableRotationAnimation;
+    }
+
+    public boolean isAnimating()
+    {
+        return animating;
     }
 
     private void beginAnimate(boolean delayed) {

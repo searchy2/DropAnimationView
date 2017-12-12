@@ -11,18 +11,20 @@ import com.waynell.library.DropAnimationView;
 
 public class MainActivity extends Activity {
 
+	DropAnimationView mDropAnimation;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-        DropAnimationView view = (DropAnimationView) findViewById(R.id.drop_animation_view);
-        view.setDrawables(R.drawable.leaf_1,
+		mDropAnimation = findViewById(R.id.drop_animation_view);
+		mDropAnimation.setDrawables(R.drawable.leaf_1,
                 R.drawable.leaf_2,
                 R.drawable.leaf_3,
                 R.drawable.leaf_4,
                 R.drawable.leaf_5,
                 R.drawable.leaf_6);
-        view.startAnimation();
+		mDropAnimation.startAnimation();
 	}
 
 	@Override
@@ -41,6 +43,14 @@ public class MainActivity extends Activity {
 
 		//noinspection SimplifiableIfStatement
 		if (id == R.id.action_settings) {
+			if (mDropAnimation.isAnimating())
+			{
+				mDropAnimation.stopAnimation();
+			}
+			else
+			{
+				mDropAnimation.startAnimation();
+			}
 			return true;
 		}
 
