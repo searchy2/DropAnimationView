@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
                 R.drawable.leaf_4,
                 R.drawable.leaf_5,
                 R.drawable.leaf_6);
+//		mDropAnimation.setAnimationRate(200);
 		mDropAnimation.startAnimation();
 	}
 

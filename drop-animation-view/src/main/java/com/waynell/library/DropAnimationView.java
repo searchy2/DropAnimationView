@@ -220,6 +220,10 @@ public class DropAnimationView extends FrameLayout {
         mEnableRotationAnimation = enableRotationAnimation;
     }
 
+    public void setAnimationRate(int rate) {
+        mAnimationRate = rate;
+    }
+
     public boolean isAnimating()
     {
         return animating;
